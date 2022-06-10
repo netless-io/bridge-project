@@ -11,16 +11,18 @@ declare global {
     }
 }
 
+type storageType = {ack: boolean, method: string, resolve: (data: any) => void, reject: (e: any) => void, callback: any };
+
 export class Bridge {
     methods: Map<string, any> = new Map();
     asyncMethods: Map<string, any> = new Map();
-    queue: Map<string|number[], any> = new Map();
+    queue: Map<string|number[], storageType> = new Map();
 
-    public call(method: string, ...args: any): Promise<any> {
+    public call(method: string, args: any, callback: any): Promise<any> {
         return new Promise((resolve, reject) => {
             const actionId = uuid();
             const message = bridgeMessageTemplate(BridgeEventType.evt, method, actionId, args);
-            this.queue.set(actionId, { ack: false, resolve: resolve, reject: reject, method });
+            this.queue.set(actionId, { ack: false, resolve: resolve, reject: reject, method, callback });
             window.ReactNativeWebView!.postMessage(message); 
         });
     }
@@ -104,12 +106,14 @@ export class Bridge {
                 {
                     const ackPayload = payload as BridgeAckPayload;
                     if (this.queue.has(actionId)) {
-                        const q = this.queue.get(actionId);
+                        const q = this.queue.get(actionId)!;
                         q.ack = true;
                         if (method === ackTypeError) {
                             q.reject(payload);
                         } else {
                             q.resolve(ackPayload.data);
+                            // callback 是兼容 dsbridge API，await 模式更好一些。
+                            q.callback(ackPayload.data);
                         }
                         if (ackPayload.complete) {
                             this.queue.delete(actionId);

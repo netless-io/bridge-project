@@ -1,6 +1,6 @@
 {
   "name": "@netless/webview-bridge",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "bridge in web for webview react-native and future for native and flutter",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -22,6 +22,11 @@
   "bugs": {
     "url": "https://github.com/netless-io/webview-bridge/issues"
   },
+  "files": [
+    "dist",
+    "src",
+    "types"
+  ],
   "homepage": "https://github.com/netless-io/webview-bridge#readme",
   "devDependencies": {
     "@types/uuid": "^7.0.3",

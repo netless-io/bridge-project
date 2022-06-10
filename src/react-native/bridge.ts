@@ -127,6 +127,4 @@ class Bridge {
 }
 
 const bridge = new Bridge();
-window.addEventListener("message", e => bridge.recv(e.data))
-
 export default bridge;

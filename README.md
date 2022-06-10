@@ -6,6 +6,13 @@
 该库目前桥接的目标为 React-Native。  
 iOS，Android 的 web 桥接，可以通过 [dsbridge](https://www.npmjs.com/package/dsbridge) 实现，该库在对应的 iOS 和 Android 端有对应的实现
 
+## install
+
+```shell
+# uuid 版本过多，所以只标识为 peer dependency
+npm install @netless/webview-bridge uuid
+```
+
 ## TODO
 
 - [ ] 提供 flutter webview 中的桥接

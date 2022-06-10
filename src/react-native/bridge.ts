@@ -13,7 +13,7 @@ declare global {
 
 type storageType = {ack: boolean, method: string, resolve: (data: any) => void, reject: (e: any) => void, callback: any };
 
-export class Bridge {
+class Bridge {
     methods: Map<string, any> = new Map();
     asyncMethods: Map<string, any> = new Map();
     queue: Map<string|number[], storageType> = new Map();
@@ -125,5 +125,8 @@ export class Bridge {
         }
     }
 }
+
 const bridge = new Bridge();
+window.addEventListener("message", e => bridge.recv(e.data))
+
 export default bridge;

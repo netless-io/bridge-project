@@ -33,7 +33,7 @@ class Bridge {
     public call(method: string, args: any, callback: any): Promise<any> {
         return new Promise((resolve, reject) => {
             const actionId = uuid();
-            const message = bridgeMessageTemplate(BridgeEventType.evt, method, actionId, args);
+            const message = bridgeMessageTemplate(BridgeEventType.evt, actionId, method, args);
             this.queue.set(actionId, { ack: false, resolve: resolve, reject: reject, method, callback });
             window.ReactNativeWebView!.postMessage(message); 
         });

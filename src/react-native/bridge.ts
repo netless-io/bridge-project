@@ -26,8 +26,8 @@ class Bridge {
         window.removeEventListener("message", this.listen);
     }
 
-    private listen = (event: MessageEvent) => {
-        this.recv(event.data);
+    private listen = (e: any) => {
+        this.recv(e.data);
     }
 
     public call(method: string, args: any, callback: any): Promise<any> {
@@ -47,7 +47,7 @@ class Bridge {
         this.asyncMethods.set(name, fun);
     }
 
-    public recv(protocol: string) {
+    private recv(protocol: string) {
         if (typeof protocol == "string") {
             const {type, actionId, method, payload} = parseBridgeMessage(protocol);
             switch (type) {
@@ -72,17 +72,11 @@ class Bridge {
                         payload.push(function (data: any, complete: boolean) {
                             ret.data = data;
                             ret.complete = complete!==false;
-                            let ackMessage = "";
-                            // TODO: 此处逻辑与 whiteboard-bridge 耦合，暂时先这样。
-                            if (ret.data.__error || ret.data.error) {
-                                ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeError, ret.data);
-                            } else {
-                                ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeSuccess, ret);
-                            }
-                            window.ReactNativeWebView!.postMessage(ackMessage);
                         })
                         try {
                             f.apply(ob, payload);
+                            const ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeSuccess, ret);
+                            window.ReactNativeWebView!.postMessage(ackMessage);
                         } catch (e) {
                             const ackMessage = bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeError, e);
                             window.ReactNativeWebView!.postMessage(ackMessage);
@@ -144,5 +138,4 @@ class Bridge {
     }
 }
 
-const bridge = new Bridge();
-export default bridge;
+export const bridge = new Bridge();

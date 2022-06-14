@@ -18,6 +18,18 @@ class Bridge {
     asyncMethods: Map<string, any> = new Map();
     queue: Map<string|number[], storageType> = new Map();
 
+    public constructor() {
+        window.addEventListener("message", this.listen);
+    }
+
+    public destroy() {
+        window.removeEventListener("message", this.listen);
+    }
+
+    private listen = (event: MessageEvent) => {
+        this.recv(event.data);
+    }
+
     public call(method: string, args: any, callback: any): Promise<any> {
         return new Promise((resolve, reject) => {
             const actionId = uuid();

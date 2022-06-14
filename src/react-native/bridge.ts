@@ -60,11 +60,17 @@ class Bridge {
                         payload.push(function (data: any, complete: boolean) {
                             ret.data = data;
                             ret.complete = complete!==false;
+                            let ackMessage = "";
+                            // TODO: 此处逻辑与 whiteboard-bridge 耦合，暂时先这样。
+                            if (ret.data.__error || ret.data.error) {
+                                ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeError, ret.data);
+                            } else {
+                                ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeSuccess, ret);
+                            }
+                            window.ReactNativeWebView!.postMessage(ackMessage);
                         })
                         try {
                             f.apply(ob, payload);
-                            const ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeSuccess, ret);
-                            window.ReactNativeWebView!.postMessage(ackMessage);
                         } catch (e) {
                             const ackMessage = bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeError, e);
                             window.ReactNativeWebView!.postMessage(ackMessage);

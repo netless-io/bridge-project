@@ -128,6 +128,7 @@ export class Bridge {
                                 return;
                             }
                         }
+                        console.log(`method ${method} not found`);
                     }
                     break;
                 }    

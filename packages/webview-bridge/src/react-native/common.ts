@@ -34,6 +34,7 @@ export function parseBridgeMessage(message: string): {type: BridgeEventType, act
         const {type, actionId, method, payload} = JSON.parse(message);
         return {type: type as BridgeEventType, actionId, method, payload};
     } catch (error) {
+        console.log(`parse bridge message ${message} failed: `, error);
         return {type: "fail" as BridgeEventType, actionId: "", method: "", payload: message};
     }
 

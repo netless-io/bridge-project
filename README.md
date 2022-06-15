@@ -7,6 +7,8 @@ this repo contains `@netless/webview-bridge`,`@netless/react-native-bridge`.
 
 ```shell
 pnpm i
+# @netless/react-native-bridge depends on @netless/webview-bridge's build
+pnpm -r build
 ```
 
 ## build
@@ -18,6 +20,8 @@ pnpm -r build
 ## publish
 
 ```shell
+pnpm i
+pnpm -r build
 # publish @netless/webview-bridge to npm
 pnpm -F webview-bridge publish
 # publish @netless/react-native-bridge to npm

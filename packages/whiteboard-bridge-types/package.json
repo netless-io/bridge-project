@@ -10,13 +10,13 @@
   },
   "keywords": ["whiteboard-bridge", "types"],
   "author": "leavesster",
-  "homepage": "https://github.com/netless-io/bridge#readme",
+  "homepage": "https://github.com/netless-io/bridge-project#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netless-io/bridge.git"
+    "url": "git+https://github.com/netless-io/bridge-project.git"
   },
   "bugs": {
-    "url": "https://github.com/netless-io/bridge/issues"
+    "url": "https://github.com/netless-io/bridge-project/issues"
   },
   "license": "ISC",
   "devDependencies": {

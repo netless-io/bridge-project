@@ -8,13 +8,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "homepage": "https://github.com/netless-io/bridge#readme",
+  "homepage": "https://github.com/netless-io/bridge-project#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netless-io/bridge.git"
+    "url": "git+https://github.com/netless-io/bridge-project.git"
   },
   "bugs": {
-    "url": "https://github.com/netless-io/bridge/issues"
+    "url": "https://github.com/netless-io/bridge-project/issues"
   },
   "keywords": [
     "react-native",

@@ -1,7 +1,7 @@
 # bridge-project
 
 
-this repo contains `@netless/webview-bridge`,`@netless/react-native-bridge`.
+this repo contains `@netless/webview-bridge`,`@netless/react-native-bridge`,`@netless/whiteboard-bridge-types`
 
 ## development
 

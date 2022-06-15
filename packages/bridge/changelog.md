@@ -17,3 +17,7 @@
 # 0.0.7
 
 修复由于 rebase 导致 0.0.6 引入的 callAsync 事件回调问题
+
+# 0.0.8
+
+修复 Android 平台上，无法正确接受到 message 事件

@@ -10,6 +10,14 @@
   },
   "keywords": ["whiteboard-bridge", "types"],
   "author": "leavesster",
+  "homepage": "https://github.com/netless-io/bridge#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netless-io/bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/netless-io/bridge/issues"
+  },
   "license": "ISC",
   "devDependencies": {
     "@netless/window-manager": "^0.4.32",

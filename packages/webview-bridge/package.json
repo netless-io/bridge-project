@@ -8,9 +8,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
+  "homepage": "https://github.com/netless-io/bridge#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netless-io/bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/netless-io/bridge/issues"
   },
   "keywords": [
     "webview",
@@ -19,15 +23,11 @@
   ],
   "author": "leavesster",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/netless-io/bridge/issues"
-  },
   "files": [
     "dist",
     "src",
     "types"
   ],
-  "homepage": "https://github.com/netless-io/bridge#readme",
   "devDependencies": {
     "@types/uuid": "^7.0.3",
     "uuid": "^7.0.3"

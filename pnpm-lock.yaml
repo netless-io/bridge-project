@@ -8,23 +8,23 @@ importers:
     devDependencies:
       typescript: 4.7.3
 
-  packages/bridge:
+  packages/react-native-bridge:
+    specifiers:
+      '@netless/webview-bridge': workspace:^*
+      react-native-uuid: ^2.0.1
+      react-native-webview: ^11.22.2
+    dependencies:
+      '@netless/webview-bridge': link:../webview-bridge
+      react-native-uuid: 2.0.1
+      react-native-webview: 11.22.2_uizhajzqxi4ntp2s7iudf2viaa
+
+  packages/webview-bridge:
     specifiers:
       '@types/uuid': ^7.0.3
       uuid: ^7.0.3
     devDependencies:
       '@types/uuid': 7.0.5
       uuid: 7.0.3
-
-  packages/bridge-rn:
-    specifiers:
-      '@netless/bridge': workspace:^*
-      react-native-uuid: ^2.0.1
-      react-native-webview: ^11.22.2
-    dependencies:
-      '@netless/bridge': link:../bridge
-      react-native-uuid: 2.0.1
-      react-native-webview: 11.22.2_uizhajzqxi4ntp2s7iudf2viaa
 
 packages:
 

@@ -13,7 +13,7 @@ declare global {
 
 type storageType = {ack: boolean, method: string, resolve: (data: any) => void, reject: (e: any) => void, callback: any };
 
-class Bridge {
+export class Bridge {
     methods: Map<string, any> = new Map();
     asyncMethods: Map<string, any> = new Map();
     queue: Map<string|number[], storageType> = new Map();

@@ -17,6 +17,7 @@ export class Bridge {
     methods: Map<string, any> = new Map();
     asyncMethods: Map<string, any> = new Map();
     queue: Map<string|number[], storageType> = new Map();
+    private verbose = false;
 
     public constructor() {
         // https://github.com/react-native-webview/react-native-webview/issues/1688#issuecomment-735434550
@@ -25,6 +26,10 @@ export class Bridge {
         } else {
             window.addEventListener("message", this.listen);
         }
+    }
+
+    public enableLog() {
+        this.verbose = true;
     }
 
     public destroy() {
@@ -60,6 +65,7 @@ export class Bridge {
     private recv(protocol: string) {
         if (typeof protocol == "string") {
             const {type, actionId, method, payload} = parseBridgeMessage(protocol);
+            this.verbose && console.log({type, actionId, method, payload});
             switch (type) {
                 case BridgeEventType.req:
                 {

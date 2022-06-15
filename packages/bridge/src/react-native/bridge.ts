@@ -19,11 +19,21 @@ class Bridge {
     queue: Map<string|number[], storageType> = new Map();
 
     public constructor() {
-        window.addEventListener("message", this.listen);
+        // https://github.com/react-native-webview/react-native-webview/issues/1688#issuecomment-735434550
+        if (this.isAndroid()) {
+            document.addEventListener("message", this.listen);
+        } else {
+            window.addEventListener("message", this.listen);
+        }
     }
 
     public destroy() {
         window.removeEventListener("message", this.listen);
+        document.addEventListener("message", this.listen);
+    }
+
+    private isAndroid = () => {
+        return /android/i.test(navigator.userAgent) || /android/i.test(`${(window as any).__platform}`);
     }
 
     private listen = (e: any) => {

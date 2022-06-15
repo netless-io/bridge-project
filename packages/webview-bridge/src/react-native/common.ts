@@ -30,6 +30,11 @@ export function bridgeMessageTemplate(type: BridgeEventType, actionId: string, m
 }
 
 export function parseBridgeMessage(message: string): {type: BridgeEventType, actionId: string, method: string, payload: any} {
-    const {type, actionId, method, payload} = JSON.parse(message);
-    return {type: type as BridgeEventType, actionId, method, payload};
+    try {
+        const {type, actionId, method, payload} = JSON.parse(message);
+        return {type: type as BridgeEventType, actionId, method, payload};
+    } catch (error) {
+        return {type: "fail" as BridgeEventType, actionId: "", method: "", payload: message};
+    }
+
 }

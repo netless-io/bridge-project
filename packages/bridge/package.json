@@ -1,5 +1,5 @@
 {
-  "name": "@netless/webview-bridge",
+  "name": "@netless/bridge",
   "version": "0.0.7",
   "description": "bridge in web for webview react-native and future for native and flutter",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netless-io/webview-bridge.git"
+    "url": "git+https://github.com/netless-io/bridge.git"
   },
   "keywords": [
     "webview",
@@ -20,14 +20,14 @@
   "author": "leavesster",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/netless-io/webview-bridge/issues"
+    "url": "https://github.com/netless-io/bridge/issues"
   },
   "files": [
     "dist",
     "src",
     "types"
   ],
-  "homepage": "https://github.com/netless-io/webview-bridge#readme",
+  "homepage": "https://github.com/netless-io/bridge#readme",
   "devDependencies": {
     "@types/uuid": "^7.0.3",
     "typescript": "^4.7.3",

@@ -1,14 +1,16 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@types/uuid': ^7.0.3
-  typescript: ^4.7.3
-  uuid: ^7.0.3
+importers:
 
-devDependencies:
-  '@types/uuid': 7.0.5
-  typescript: 4.7.3
-  uuid: 7.0.3
+  packages/webview-bridge:
+    specifiers:
+      '@types/uuid': ^7.0.3
+      typescript: ^4.7.3
+      uuid: ^7.0.3
+    devDependencies:
+      '@types/uuid': 7.0.5
+      typescript: 4.7.3
+      uuid: 7.0.3
 
 packages:
 

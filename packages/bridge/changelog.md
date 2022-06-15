@@ -16,4 +16,4 @@
 
 # 0.0.7
 
-修复由于 rebase 导致 0.0.6 引入的 callAync 事件回调问题
+修复由于 rebase 导致 0.0.6 引入的 callAsync 事件回调问题

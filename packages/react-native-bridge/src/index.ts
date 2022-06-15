@@ -1,5 +1,5 @@
 import WebView from 'react-native-webview';
-import { RNCommon } from '@netless/bridge';
+import { RNCommon } from '@netless/webview-bridge';
 import uuid from "react-native-uuid";
 
 class Bridge {

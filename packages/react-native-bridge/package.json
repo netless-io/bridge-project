@@ -1,5 +1,5 @@
 {
-  "name": "@netless/bridge-rn",
+  "name": "@netless/react-native-bridge",
   "version": "0.0.4",
   "description": "",
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
   "devDependencies": {
   },
   "dependencies": {
-    "@netless/bridge": "workspace:^*",
+    "@netless/webview-bridge": "workspace:^*",
     "react-native-uuid": "^2.0.1",
     "react-native-webview": "^11.22.2"
   }

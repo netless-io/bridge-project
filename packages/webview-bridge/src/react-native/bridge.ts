@@ -54,8 +54,12 @@ export class Bridge {
         });
     }
 
-    public register(name: string, fun: any) {
-        this.methods.set(name, fun);
+    public register(name: string, fun: any, async: boolean = false) {
+        if (async) {
+            this.asyncMethods.set(name, fun)
+        } else {
+            this.methods.set(name, fun);
+        }
     }
 
     public registerAsyn(name: string, fun: any) {

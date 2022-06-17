@@ -11,11 +11,10 @@ import {
     MemberState,
     ApplianceNames, 
     ShapeType, 
-    MediaType
     } from "white-web-sdk";
 import {BaseTypeKey, Writable, NumberType} from "./generic";
 import { WindowManager, MountParams, PageState } from "@netless/window-manager";
-import { TeleBoxState, TeleBoxColorScheme } from "@netless/telebox-insider";
+import { TeleBoxState } from "@netless/telebox-insider";
 
 declare global {
     interface Window {

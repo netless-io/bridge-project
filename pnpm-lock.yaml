@@ -28,9 +28,11 @@ importers:
 
   packages/whiteboard-bridge-types:
     specifiers:
+      '@netless/telebox-insider': 0.2.26
       '@netless/window-manager': ^0.4.32
       white-web-sdk: ^2.16.24
     devDependencies:
+      '@netless/telebox-insider': 0.2.26
       '@netless/window-manager': 0.4.32_white-web-sdk@2.16.24
       white-web-sdk: 2.16.24
 

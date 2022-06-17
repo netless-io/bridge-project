@@ -1,6 +1,6 @@
 {
   "name": "@netless/whiteboard-bridge-types",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "whiteboard-bridge's types, publish for reuse to react-native",
   "main": "dist/index.js",
   "types": "./types/index.d.ts",
@@ -8,7 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "keywords": ["whiteboard-bridge", "types"],
+  "keywords": [
+    "whiteboard-bridge",
+    "types"
+  ],
   "author": "leavesster",
   "homepage": "https://github.com/netless-io/bridge-project#readme",
   "repository": {
@@ -20,6 +23,7 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@netless/telebox-insider": "0.2.26",
     "@netless/window-manager": "^0.4.32",
     "white-web-sdk": "^2.16.24"
   }

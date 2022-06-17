@@ -1,6 +1,6 @@
 {
   "name": "@netless/react-native-bridge",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -25,7 +25,8 @@
   "license": "MIT",
   "files": [
     "build",
-    "src"
+    "src",
+    "types"
   ],
   "devDependencies": {
   },

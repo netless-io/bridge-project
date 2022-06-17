@@ -1,7 +1,21 @@
 
-import {WhiteWebSdkConfiguration, ReplayRoomParams, JoinRoomParams, Room, Player, CameraBound, WhiteWebSdk} from "white-web-sdk";
+import {
+    WhiteWebSdkConfiguration, 
+    ReplayRoomParams, 
+    JoinRoomParams, 
+    Room, 
+    Player, 
+    CameraBound, 
+    WhiteWebSdk,
+    RoomState,
+    MemberState,
+    ApplianceNames, 
+    ShapeType, 
+    MediaType
+    } from "white-web-sdk";
 import {BaseTypeKey, Writable, NumberType} from "./generic";
-import { WindowManager, MountParams } from "@netless/window-manager";
+import { WindowManager, MountParams, PageState } from "@netless/window-manager";
+import { TeleBoxState, TeleBoxColorScheme } from "@netless/telebox-insider";
 
 declare global {
     interface Window {
@@ -87,7 +101,7 @@ export type NativeSDKConfig = {
     __nativeTags?: any;
     /** native 预热结果，web sdk 升级至 2.8.0 后，该功能不再需要主动测一遍。保留该字段，是为了兼容，以及抽离选项 */
     initializeOriginsStates?: any;
-    __platform: "ios" | "android" | "bridge";
+    __platform: "ios" | "android" | "bridge" | "rn";
     __netlessUA?: [string];
     /** 多窗口在初始化的时候，需要配置 useMobxState 为 true，所以在初始化 sdk 的时候，就需要知道参数 */
     useMultiViews?: boolean;
@@ -134,3 +148,26 @@ export type NativeReplayParams = BaseTypeReplayParams & {
     mediaURL?: string;
     windowParams?: MountParams;
 };
+
+export type Appliance = `${ApplianceNames}`;
+export type ApplianceShape = `${ShapeType}`;
+export type RoomMemberState = Omit<Omit<MemberState, 'currentApplianceName'>, 'shapeType'> & {
+    currentApplianceName: Appliance,
+    shapeType: ApplianceShape
+}
+
+export type WhiteRoomState = RoomState & {
+    windowBoxState: TeleBoxState,
+    pageState: PageState
+}
+
+export type EventEntry = {
+    eventName: string;
+    payload: any;
+};
+
+export const pptNamespace = "ppt";
+export const roomSyncNamespace = "room.sync";
+export const roomNamespace = "room";
+export const roomStateNamespace = "room.state";
+export const sdkNameSpace = 'sdk';

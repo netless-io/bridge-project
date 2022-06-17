@@ -85,6 +85,7 @@ class Bridge {
                 case RNCommon.BridgeEventType.evt:
                     if (this.methods.has(method)) {
                         let fun = this.methods.get(method);
+                        let thisObj = this.methods;
                         if (!fun) {
                             const names = method.split(".")
                             if (names.length < 2) {
@@ -94,6 +95,7 @@ class Bridge {
                             const namespaceMethod = names.pop();
                             const namespace = names.join(".");
                             if (this.methods.has(namespace)) {
+                                thisObj = this.methods.get(namespace);
                                 fun = this.methods.get(namespace)[namespaceMethod!];
                             } else {
                                 console.log(`namespace ${namespace} not found`);
@@ -101,7 +103,7 @@ class Bridge {
                             }
                         }
                         try {
-                            const ret = fun.apply(payload);
+                            const ret = fun.call(thisObj, payload);
                             const protocolForAck = RNCommon.bridgeMessageTemplate(RNCommon.BridgeEventType.ack, actionId, RNCommon.ackTypeSuccess, ret);
                             this.webview!.postMessage(protocolForAck);
                         } catch (e) {

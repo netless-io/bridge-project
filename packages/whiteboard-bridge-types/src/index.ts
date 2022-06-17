@@ -10,11 +10,16 @@ import {
     RoomState,
     MemberState,
     ApplianceNames, 
-    ShapeType, 
+    ShapeType,
     } from "white-web-sdk";
 import {BaseTypeKey, Writable, NumberType} from "./generic";
 import { WindowManager, MountParams, PageState } from "@netless/window-manager";
 import { TeleBoxState } from "@netless/telebox-insider";
+
+export type { BroadcastState, GlobalState, ImageInformation, RoomPhase, SceneDefinition, SceneState, WhiteScene, MediaType } from "white-web-sdk";
+export type { AddPageParams } from "@netless/window-manager";
+export type { BaseTypeKey, Writable, NumberType } from "./generic";
+export type { TeleBoxState, TeleBoxColorScheme } from "@netless/telebox-insider";
 
 declare global {
     interface Window {

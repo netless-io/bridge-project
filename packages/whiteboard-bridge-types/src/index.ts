@@ -3,52 +3,20 @@ import {
     WhiteWebSdkConfiguration, 
     ReplayRoomParams, 
     JoinRoomParams, 
-    Room, 
-    Player, 
     CameraBound, 
-    WhiteWebSdk,
     RoomState,
     MemberState,
     ApplianceNames, 
     ShapeType,
     } from "white-web-sdk";
 import {BaseTypeKey, Writable, NumberType} from "./generic";
-import { WindowManager, MountParams, PageState } from "@netless/window-manager";
+import { MountParams, PageState } from "@netless/window-manager";
 import { TeleBoxState } from "@netless/telebox-insider";
 
 export type { BroadcastState, GlobalState, ImageInformation, RoomPhase, SceneDefinition, SceneState, WhiteScene, MediaType } from "white-web-sdk";
 export type { AddPageParams } from "@netless/window-manager";
 export type { BaseTypeKey, Writable, NumberType } from "./generic";
 export type { TeleBoxState, TeleBoxColorScheme } from "@netless/telebox-insider";
-
-declare global {
-    interface Window {
-      room?: Room;
-      manager?: WindowManager;
-      // 用来给外部 js 注册用的
-      registerApp?: typeof WindowManager.register;
-      sdk?: WhiteWebSdk;
-      player?: Player;
-      bridge?: any;
-      __nativeTags?: any;
-      __platform?: any;
-      __netlessUA?: string;
-      __netlessMobXUseProxies?: string;
-      testRoom: () => void;
-      testReplay: () => void;
-      html2canvas: any;
-      setBackgroundColor: (r: number, g: number, b: number, a?: number | undefined) => void;
-      plugins: any;
-      pluginParams: PluginParams[];
-      pluginContext: PluginContext[];
-      appRegisterParams: AppRegisterParams[];
-      nativeWebSocket?: boolean;
-      // dsBridge 异步方法，用来注册 js 回调, dsBridge 会在尾部加一个 function
-      _dsaf: any;
-      // dsBridge 同步方法，用来注册 js 回调
-      _dsf: any;
-    }
-}
 
 // 插件注册信息
 export type PluginParams = {

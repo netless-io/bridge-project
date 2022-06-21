@@ -22,7 +22,7 @@
     "url": "https://github.com/netless-io/bridge-project/issues"
   },
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@netless/telebox-insider": "0.2.26",
     "@netless/window-manager": "^0.4.32",
     "white-web-sdk": "^2.16.24"

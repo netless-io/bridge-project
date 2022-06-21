@@ -8,12 +8,26 @@ import {
     MemberState,
     ApplianceNames, 
     ShapeType,
+    PlayerState,
+    DisplayerState,
     } from "white-web-sdk";
 import {BaseTypeKey, Writable, NumberType} from "./generic";
 import { MountParams, PageState } from "@netless/window-manager";
 import { TeleBoxState } from "@netless/telebox-insider";
 
-export type { BroadcastState, GlobalState, ImageInformation, RoomPhase, SceneDefinition, SceneState, WhiteScene, MediaType } from "white-web-sdk";
+export type { 
+    BroadcastState, 
+    GlobalState, 
+    ImageInformation, 
+    RoomPhase, 
+    SceneDefinition, 
+    SceneState, 
+    WhiteScene, 
+    MediaType,
+    PlayerPhase,
+    PlayerState,
+    PlayerSeekingResult,
+    ObserverMode } from "white-web-sdk";
 export type { AddPageParams } from "@netless/window-manager";
 export type { BaseTypeKey, Writable, NumberType } from "./generic";
 export type { TeleBoxState, TeleBoxColorScheme } from "@netless/telebox-insider";
@@ -138,8 +152,25 @@ export type EventEntry = {
     payload: any;
 };
 
+export type PlayerTimeInfo = {
+    scheduleTime: number;
+    timeDuration: number;
+    framesCount: number;
+    beginTimestamp: number;
+}
+
+export type NativeDisplayerState = DisplayerState & {
+    pageState: PageState;
+    windowBoxState: TeleBoxState;
+}
+
+export type NativePlayerState = PlayerState & NativeDisplayerState;
+
 export const pptNamespace = "ppt";
 export const roomSyncNamespace = "room.sync";
 export const roomNamespace = "room";
 export const roomStateNamespace = "room.state";
 export const sdkNameSpace = 'sdk';
+
+export const playerNameSpace = "player";
+export const playerStateNameSpace = "player.state";

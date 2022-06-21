@@ -93,8 +93,20 @@ export class Bridge {
                             ret.data = data;
                             ret.complete = complete!==false;
                             let ackMessage = "";
+                            
+                            let isError = false;
                             // TODO: 此处逻辑与 whiteboard-bridge 耦合，暂时先这样。
-                            if (ret.data.__error || ret.data.error) {
+                            if (typeof data === "string") {
+                                try {
+                                    const dataObj = JSON.parse(data);
+                                    isError = !!(dataObj.error || dataObj.__error);
+                                } catch (error) {
+                                    
+                                }
+                            } else {
+                                isError = !!(data.error || data.__error);
+                            }
+                            if (isError) {
                                 ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeError, ret.data);
                             } else {
                                 ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeSuccess, ret);

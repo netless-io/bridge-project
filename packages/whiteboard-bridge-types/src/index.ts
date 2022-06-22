@@ -10,6 +10,7 @@ import {
     ShapeType,
     PlayerState,
     DisplayerState,
+    ViewMode as VM
     } from "white-web-sdk";
 import {BaseTypeKey, Writable, NumberType} from "./generic";
 import { MountParams, PageState } from "@netless/window-manager";
@@ -135,6 +136,7 @@ export type NativeReplayParams = BaseTypeReplayParams & {
     windowParams?: MountParams;
 };
 
+export type ViewMode = `${VM}`;
 export type Appliance = `${ApplianceNames}`;
 export type ApplianceShape = `${ShapeType}`;
 export type RoomMemberState = Omit<Omit<MemberState, 'currentApplianceName'>, 'shapeType'> & {

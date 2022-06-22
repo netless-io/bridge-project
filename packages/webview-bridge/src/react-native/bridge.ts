@@ -104,7 +104,7 @@ export class Bridge {
                                     
                                 }
                             } else {
-                                isError = !!(data.error || data.__error);
+                                isError = !!(data && (data.error || data.__error));
                             }
                             if (isError) {
                                 ackMessage =  bridgeMessageTemplate(BridgeEventType.ack, actionId, ackTypeError, ret.data);

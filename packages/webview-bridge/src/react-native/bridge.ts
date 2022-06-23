@@ -45,7 +45,7 @@ export class Bridge {
         this.recv(e.data);
     }
 
-    public call(method: string, args: any, callback: any): Promise<any> {
+    public call(method: string, args?: any, callback?: any): Promise<any> {
         return new Promise((resolve, reject) => {
             const actionId = uuid();
             const message = bridgeMessageTemplate(BridgeEventType.evt, actionId, method, args);
@@ -165,7 +165,9 @@ export class Bridge {
                         } else {
                             q.resolve(ackPayload.data);
                             // callback 是兼容 dsbridge API，await 模式更好一些。
-                            q.callback(ackPayload.data);
+                            if (q.callback) {
+                                q.callback(ackPayload.data);
+                            }
                         }
                         if (ackPayload.complete) {
                             this.queue.delete(actionId);

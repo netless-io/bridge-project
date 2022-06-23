@@ -103,7 +103,12 @@ class Bridge {
                             }
                         }
                         try {
-                            const ret = fun.call(thisObj, payload);
+                            const ret: RNCommon.BridgeAckPayload = {
+                                data: undefined,
+                                actionId: actionId,
+                                complete: true
+                            }
+                            ret.data = fun.call(thisObj, payload);
                             const protocolForAck = RNCommon.bridgeMessageTemplate(RNCommon.BridgeEventType.ack, actionId, RNCommon.ackTypeSuccess, ret);
                             this.webview!.postMessage(protocolForAck);
                         } catch (e) {

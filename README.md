@@ -20,12 +20,8 @@ pnpm -r build
 ## publish
 
 ```shell
-pnpm i
-pnpm -r build
-# publish @netless/webview-bridge to npm
-pnpm -F webview-bridge publish --access=public
-# publish @netless/react-native-bridge to npm
-pnpm -F react-native-bridge publish --access=public
-# publish @netless/whiteboard-bridge-types to npm
-pnpm -F @netless/whiteboard-bridge-types publish --access=public
+# 平时使用 changeset 生成变更，publish 时，changeset 可以自动生成 changelog
+pnpm publish
+# 默认生成的 tags 不会 push 到 git，需要手动 push
+git push --tags
 ```

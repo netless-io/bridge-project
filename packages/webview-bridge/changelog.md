@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- e4e6418: not export const
+- e4e6418: will not export const `bridge`, will break some import code
 
 ## 0.0.12
 

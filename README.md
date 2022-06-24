@@ -21,7 +21,8 @@ pnpm -r build
 
 ```shell
 # 平时使用 changeset 生成变更，publish 时，changeset 可以自动生成 changelog
-pnpm publish
+# pnpm run publish 才会执行 scripts 中的 publish 脚本
+pnpm run publish
 # 默认生成的 tags 不会 push 到 git，需要手动 push
 git push --tags
 ```

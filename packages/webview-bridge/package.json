@@ -1,6 +1,6 @@
 {
   "name": "@netless/webview-bridge",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "bridge in web for webview react-native and future for native and flutter",
   "main": "dist/index.js",
   "types": "types/index.d.ts",

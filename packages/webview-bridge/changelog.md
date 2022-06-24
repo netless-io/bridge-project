@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.0.14
+
+### Patch Changes
+
+- 0b58a14: update dist for 0.0.12
+
 ## 0.0.13
 
 ### Patch Changes

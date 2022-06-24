@@ -179,5 +179,3 @@ export class Bridge {
         }
     }
 }
-
-export const bridge = new Bridge();

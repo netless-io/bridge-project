@@ -20,6 +20,10 @@ pnpm -r build
 ## publish
 
 ```shell
+# 生成 changelog
+pnpm version
+# changelog 不会被提交，手动补充下
+git commit -a --amend --no-edit
 # 平时使用 changeset 生成变更，publish 时，changeset 可以自动生成 changelog
 # pnpm run publish 才会执行 scripts 中的 publish 脚本
 pnpm run publish

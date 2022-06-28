@@ -1,5 +1,11 @@
 # react-native-bridge
 
+## 0.0.8
+
+### Patch Changes
+
+- 41d22ef: remove single instance, export class, provide destroy api to remove store actions
+
 ## 0.0.7
 
 ### Patch Changes

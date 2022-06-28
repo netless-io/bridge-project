@@ -2,7 +2,7 @@ import WebView from 'react-native-webview';
 import { RNCommon } from '@netless/webview-bridge';
 import uuid from "react-native-uuid";
 
-class Bridge {
+export class Bridge {
     private webview: WebView | undefined = undefined;
     private methods: Map<string, any> = new Map();
     private queue: Map<string | number[], any> = new Map();
@@ -21,6 +21,13 @@ class Bridge {
         this.pendingAction.forEach(action => {
             action();
         });
+    }
+
+    public destroy() {
+        if (this.isReady) {
+            this.pendingAction = [];
+        }
+        this.isReady = false;
     }
 
     public call(method: string, ...args: any) {
@@ -121,4 +128,3 @@ class Bridge {
         }
     }
 }
-export const bridge = new Bridge();

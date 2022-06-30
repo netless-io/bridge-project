@@ -1,0 +1,6 @@
+### 0.1.6
+- Drop 'room' & 'container' for windowParams
+### 0.1.5
+- change dependencies to peerDependecies
+### 0.1.4
+- 基础功能

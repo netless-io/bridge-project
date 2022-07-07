@@ -123,7 +123,7 @@ type BaseTypeRoomParams = BaseTypeKey<JoinRoomParams>;
 export type NativeJoinRoomParams = BaseTypeRoomParams & {
     cameraBound?: NativeCameraBound;
     timeout?: number;
-    windowParams?: MountParams;
+    windowParams?: Omit<Omit<MountParams, 'room'>, 'container'>;
     userPayload?: {[key in string]: any};
     nativeWebSocket?: boolean;
 };

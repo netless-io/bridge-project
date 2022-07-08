@@ -12,6 +12,10 @@
     "whiteboard-bridge",
     "types"
   ],
+  "files": [
+    "dist",
+    "types"
+  ],
   "author": "leavesster",
   "homepage": "https://github.com/netless-io/bridge-project#readme",
   "repository": {
@@ -23,6 +27,11 @@
   },
   "license": "ISC",
   "peerDependencies": {
+    "@netless/window-manager": "*",
+    "@netless/telebox-insider": "*",
+    "white-web-sdk": "*"
+  },
+  "devDependencies": {
     "@netless/window-manager": "*",
     "@netless/telebox-insider": "*",
     "white-web-sdk": "*"

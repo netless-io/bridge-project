@@ -1,10 +1,10 @@
-export type JsonValue = string | number | boolean | null | undefined | {
+export type JsonValue = string | number | boolean | null | undefined | void | {
     [key: string]: JsonValue;
 } | JsonValue[];
 
 export type CallFunction = (nativeMethod: string, parameter?: JsonValue) => void;
 export type AsyncCallFunction = (nativeMethod: string, parameter?: JsonValue) => Promise<JsonValue>;
-export type SyncCallFunction = (nativeMethod: string, parameter?: JsonValue) => void;
+export type SyncCallFunction = (nativeMethod: string, parameter?: JsonValue) => JsonValue;
 
 export type JsNormalFunction = (this: JsNormalFunctionHandler, ...parameter: JsonValue[]) => JsonValue;
 

@@ -1,35 +1,31 @@
 import {v4 as uuid} from "uuid";
 
-type JsonValue = string | number | boolean | null | undefined | {
+export type JsonValue = string | number | boolean | null | undefined | {
     [key: string]: JsonValue;
 } | JsonValue[];
 
-interface WebViewBridgeCall {
+export interface WebViewBridgeCall {
     call(nativeMethod: string, parameter?: JsonValue): void;
     asyncCall(nativeMethod: string, parameter?: JsonValue): Promise<JsonValue>;
     syncCall(nativeMethod: string, parameter?: JsonValue): JsonValue;
 }
 
-type JsReturnFunction = (this: JsNormalFunctionHandler, ...parameter: JsonValue[]) => JsonValue;
+export type JsNormalFunction = (this: JsNormalFunctionHandler, ...parameter: JsonValue[]) => JsonValue;
 
-export type JsNormalFunction = JsReturnFunction;
-export type JsNormalFunctionHandler = { [key: string]: JsNormalFunction };
-
-type AsyncPromiseFunction = (this: AsyncJsFunctionHandler, ...parameter: JsonValue[]) => Promise<JsonValue>;
-type AsyncCallbackFunction = (this: AsyncJsFunctionHandler, ...parameter: [...JsonValue[], (r: JsonValue) => void]) => any;
-
+export type AsyncPromiseFunction = (this: AsyncJsFunctionHandler, ...parameter: JsonValue[]) => Promise<JsonValue>;
+export type AsyncCallbackFunction = (this: AsyncJsFunctionHandler, ...parameter: [...JsonValue[], (r: JsonValue) => void]) => any;
 export type AsyncJsFunction = AsyncPromiseFunction | AsyncCallbackFunction;
-export type AsyncJsFunctionHandler = { [key: string]: AsyncJsFunction };
 
 export type ProcessJsFunction = (this: ProcessJsFunctionHandler, ...parameter: [...JsonValue[], (t: JsonValue, complete: boolean) => void]) => void;
-export type ProcessJsFunctionHandler = { [key: string]: ProcessJsFunction };
 
+export type JsNormalFunctionHandler = { [key: string]: JsNormalFunction } | JsNormalFunction;
+export type AsyncJsFunctionHandler = { [key: string]: AsyncJsFunction } | AsyncJsFunction;
+export type ProcessJsFunctionHandler = { [key: string]: ProcessJsFunction } | ProcessJsFunction;
 
-
-interface WebViewRegister {
-    register(handlerName: string, handler: JsNormalFunction | JsNormalFunctionHandler): void;
-    registerAsync(handlerName: string, handler: AsyncJsFunction | AsyncJsFunctionHandler): void;
-    registerProgress(handlerName: string, handler: ProcessJsFunction | ProcessJsFunctionHandler): void;
+export interface WebViewRegister {
+    register(handlerName: string, handler: JsNormalFunctionHandler): void;
+    registerAsync(handlerName: string, handler:AsyncJsFunctionHandler): void;
+    registerProgress(handlerName: string, handler: ProcessJsFunctionHandler): void;
 }
 
 type RegisterMap = {
@@ -55,6 +51,7 @@ declare global {
         _handleMessageFromNative: any;
     }
 }
+
 class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
     private registerMap: RegisterMap = {
         normal: {},

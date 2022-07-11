@@ -1,2 +1,2 @@
 export * from "./react-native";
-export {bridge} from "./bridge";
+export * from "./bridge";

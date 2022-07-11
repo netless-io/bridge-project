@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.1
+
+### Patch Changes
+
+- cf8e013: change rn export name
+
 ## 0.1.0
 
 ### Minor Changes

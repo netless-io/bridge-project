@@ -1,2 +1,2 @@
 export * as RNCommon from "./common";
-export {Bridge} from "./bridge";
+export {Bridge as RNBridge} from "./bridge";

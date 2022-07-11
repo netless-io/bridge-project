@@ -11,6 +11,16 @@ pnpm i
 pnpm -r build
 ```
 
+```shell
+# changeset 默认命令就是 add，可以不写 add
+pnpm changeset add
+
+# 提交改动
+# changeset add 自动 commit 只提交他自己的 changeset 文件，其他文件需要自己改动
+git add <files>
+git commit -m <message>
+```
+
 ## build
 
 ```shell

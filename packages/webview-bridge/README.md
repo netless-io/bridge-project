@@ -16,4 +16,9 @@ npm install @netless/webview-bridge uuid
 ## TODO
 
 - [ ] 提供 flutter webview 中的桥接
-- [ ] 提供 dsbridge webview 中的桥接替换
+- [x] 提供 dsbridge webview 中的桥接替换
+
+## 接口设计
+
+1. js 端调用 native 时，同步和异步的 api 应该分开，而不是像 dsbridge 那样，都是用同一个 call API，非常容易混淆。应该分为 callSync 和 callAsync 两种，而且由于同步的阻塞性，默认应该是 callAsync。
+2. js 注册 API 时，不应该是 register 和 registerAsync，实际上这两个 api 对于 native 而言，都是异步的，这个命名会让人非常困惑。两者的不同点在于后者的回调可以重复调用，也就是可以不断回调，通常作为进度回调使用。所以应该注册为 register 和 registerProgress 

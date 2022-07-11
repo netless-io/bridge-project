@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.0
+
+### Minor Changes
+
+- b2bb26c: replace dsbridge and support more call method
+
 ## 0.0.14
 
 ### Patch Changes

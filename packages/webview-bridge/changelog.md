@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.4
+
+### Patch Changes
+
+- 7a30193: json value support void
+
 ## 0.1.3
 
 ### Patch Changes

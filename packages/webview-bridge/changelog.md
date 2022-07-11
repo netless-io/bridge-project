@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.2
+
+### Patch Changes
+
+- 70a3859: export bridge types
+
 ## 0.1.1
 
 ### Patch Changes

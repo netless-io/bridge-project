@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.7
+
+### Patch Changes
+
+- 36d6e79: fix setTimeout call crash
+
 ## 0.1.6
 
 ### Patch Changes

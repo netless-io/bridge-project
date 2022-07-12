@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.5
+
+### Patch Changes
+
+- cc48890: export register map
+
 ## 0.1.4
 
 ### Patch Changes

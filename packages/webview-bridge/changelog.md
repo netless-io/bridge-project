@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.6
+
+### Patch Changes
+
+- f67f8f0: add ready post for backforward compatible
+
 ## 0.1.5
 
 ### Patch Changes

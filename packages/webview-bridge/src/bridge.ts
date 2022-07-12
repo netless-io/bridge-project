@@ -109,9 +109,9 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
         if (!window._dsInit) {
             window._dsInit = true;
             //notify native that js apis register successfully on next event loop
-            setTimeout(function (this: WebViewBridge) {
-                this.call("_dsb.dsinit");
-            }, 0)
+            setTimeout(function () {
+                bridge.call("_dsb.dsinit");
+            }, 0);
         }
     }
 

@@ -38,7 +38,7 @@ declare global {
 }
 
 class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
-    private registerMap: RegisterMap = {
+    public registerMap: RegisterMap = {
         normal: {},
         async: {},
         progress: {}

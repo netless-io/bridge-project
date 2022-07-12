@@ -34,6 +34,8 @@ declare global {
         _dsbridge?: any;
         webkit?: any;
         _handleMessageFromNative: any;
+        // dsbridge 注入给 native 端，告知注册成功的标识
+        _dsInit?: boolean;
     }
 }
 
@@ -89,15 +91,28 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
     }
 
     register(handlerName: string, handler: JsNormalFunctionHandler): void {
+        this.postReady();
         this.registerMap.normal[handlerName] = handler;
     }
 
     registerAsync(handlerName: string, handler: AsyncJsFunctionHandler): void {
+        this.postReady();
         this.registerMap.async[handlerName] = handler;
     }
 
     registerProgress(handlerName: string, handler: ProcessJsFunctionHandler): void {
+        this.postReady();
         this.registerMap.progress[handlerName] = handler;
+    }
+
+    private postReady = () =>  {
+        if (!window._dsInit) {
+            window._dsInit = true;
+            //notify native that js apis register successfully on next event loop
+            setTimeout(function (this: WebViewBridge) {
+                this.call("_dsb.dsinit");
+            }, 0)
+        }
     }
 
     private splitNativeMethod(method: string): [namespace: string, method: string] {

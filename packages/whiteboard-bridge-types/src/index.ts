@@ -126,6 +126,9 @@ export type NativeJoinRoomParams = BaseTypeRoomParams & {
     windowParams?: Omit<Omit<MountParams, 'room'>, 'container'>;
     userPayload?: {[key in string]: any};
     nativeWebSocket?: boolean;
+    // 在房间没有写权限时，如果主动调用了写操作，此时 时候需要抛出异常。
+    // 若设置为 true， error 回调会出现在 onThrowError 中。
+    enableRejectReadonlyError?: boolean;
 };
 
 type BaseTypeReplayParams = Writable<BaseTypeKey<ReplayRoomParams>>;

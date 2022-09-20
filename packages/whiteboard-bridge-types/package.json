@@ -27,13 +27,13 @@
   },
   "license": "ISC",
   "peerDependencies": {
-    "@netless/window-manager": "*",
-    "@netless/telebox-insider": "*",
+    "@netless/window-manager": "^1.0.0-canary.53",
+    "@netless/telebox-insider": "^1.0.0-alpha.37",
     "white-web-sdk": "*"
   },
   "devDependencies": {
-    "@netless/window-manager": "*",
-    "@netless/telebox-insider": "*",
+    "@netless/window-manager": "^1.0.0-canary.53",
+    "@netless/telebox-insider": "^1.0.0-alpha.37",
     "white-web-sdk": "*"
   }
 }

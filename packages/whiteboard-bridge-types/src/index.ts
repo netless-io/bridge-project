@@ -92,6 +92,8 @@ export type NativeSDKConfig = {
     __netlessUA?: [string];
     /** 多窗口在初始化的时候，需要配置 useMobxState 为 true，所以在初始化 sdk 的时候，就需要知道参数 */
     useMultiViews?: boolean;
+    enableSliadddeInterrupterAPI?: boolean;
+    slideAppOptions?: NativeSlideAppOptions;
 } & WhiteWebSdkConfiguration;
 
 // Android 使用 enum 名称，请勿随意改动
@@ -170,6 +172,12 @@ export type NativeDisplayerState = DisplayerState & {
 }
 
 export type NativePlayerState = PlayerState & NativeDisplayerState;
+
+export type NativeSlideAppOptions = {
+    /** 是否开启 debug 模式，打印命令输出 */
+    debug?: boolean;
+    showRenderError?: boolean;
+}   
 
 export const pptNamespace = "ppt";
 export const roomSyncNamespace = "room.sync";

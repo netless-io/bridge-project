@@ -1,5 +1,11 @@
 # @netless/whiteboard-bridge-types
 
+## 0.1.11
+
+### Patch Changes
+
+- 8ef5ced: fix typo
+
 ## 0.1.10
 
 ### Patch Changes

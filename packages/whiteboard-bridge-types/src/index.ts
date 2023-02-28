@@ -92,7 +92,7 @@ export type NativeSDKConfig = {
     __netlessUA?: [string];
     /** 多窗口在初始化的时候，需要配置 useMobxState 为 true，所以在初始化 sdk 的时候，就需要知道参数 */
     useMultiViews?: boolean;
-    enableSliadddeInterrupterAPI?: boolean;
+    enableSlideInterrupterAPI?: boolean;
     slideAppOptions?: NativeSlideAppOptions;
 } & WhiteWebSdkConfiguration;
 

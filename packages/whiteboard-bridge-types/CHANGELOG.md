@@ -1,5 +1,11 @@
 # @netless/whiteboard-bridge-types
 
+## 0.1.10
+
+### Patch Changes
+
+- cccc370: add slide app options
+
 ## 0.1.9
 
 ### Patch Changes

@@ -61,7 +61,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
     asyncCall(nativeMethod: string, parameter?: JsonValue): Promise<JsonValue> {
         const arg = {data: parameter === undefined ? null : parameter};
         return new Promise<JsonValue>(resolve => {
-            const callbackId = uuid();
+            const callbackId = "asyncCall_" + uuid().replace(/-/g, "");
             (window as any)[callbackId] = (result: JsonValue) => {
                 resolve(result);
             }

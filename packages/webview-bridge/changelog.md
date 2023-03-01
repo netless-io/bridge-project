@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.8
+
+### Patch Changes
+
+- 01e080a: fix asyn callback error
+
 ## 0.1.7
 
 ### Patch Changes

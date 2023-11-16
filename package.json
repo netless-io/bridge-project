@@ -10,8 +10,7 @@
     "publish": "pnpm -r build && pnpm changeset publish"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "pnpm": "7"
+    "node": ">=14.0.0"
   },
   "keywords": [],
   "author": "leavesster",

@@ -1,5 +1,11 @@
 # @netless/whiteboard-bridge-types
 
+## 0.1.12
+
+### Patch Changes
+
+- 8a9626f: Add `enableRtcAudioEffectIntercept`
+
 ## 0.1.11
 
 ### Patch Changes

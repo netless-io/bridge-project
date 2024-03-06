@@ -50,7 +50,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
         const arg = {data: parameter === undefined ? null : parameter};
         if (window._dsbridge) {
             window._dsbridge.call(nativeMethod, JSON.stringify(arg));
-        } else {
+        } else if (window.webkit.messageHandlers && window.webkit.messageHandlers.asyncBridge) {
             window.webkit.messageHandlers.asyncBridge.postMessage({
                 method: nativeMethod,
                 arg: JSON.stringify(arg),
@@ -69,7 +69,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
             (arg as any)[callbackField] = callbackId;
             if (window._dsbridge) {
                 window._dsbridge.call(nativeMethod, JSON.stringify(arg));
-            } else {
+            } else if (window.webkit.messageHandlers && window.webkit.messageHandlers.asyncBridge) {
                 window.webkit.messageHandlers.asyncBridge.postMessage({
                     method: nativeMethod,
                     arg: JSON.stringify(arg),

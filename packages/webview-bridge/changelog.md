@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.10
+
+### Patch Changes
+
+- 170e223: Ensure `window.webkit.messageHandlers.asyncBridge` value before use it
+
 ## 0.1.8
 
 ### Patch Changes

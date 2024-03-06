@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.11
+
+### Patch Changes
+
+- 95a0ad0: Ensure `window.webkit` is undefined before use
+
 ## 0.1.10
 
 ### Patch Changes

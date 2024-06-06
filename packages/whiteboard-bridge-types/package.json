@@ -1,6 +1,6 @@
 {
   "name": "@netless/whiteboard-bridge-types",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "whiteboard-bridge's types, publish for reuse to react-native",
   "main": "dist/index.js",
   "types": "./types/index.d.ts",

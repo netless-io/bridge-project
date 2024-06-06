@@ -1,5 +1,11 @@
 # @netless/whiteboard-bridge-types
 
+## 0.1.13
+
+### Patch Changes
+
+- 6260d80: add enableAppliancePlugin config
+
 ## 0.1.12
 
 ### Patch Changes

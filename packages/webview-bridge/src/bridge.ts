@@ -1,5 +1,5 @@
-import {v4 as uuid} from "uuid";
-import type {JsonValue, CallFunction, AsyncCallFunction, SyncCallFunction, RegisterFunction, RegisterAsyncFunction, RegisterProcessFunction, JsNormalFunctionHandler, AsyncJsFunctionHandler, ProcessJsFunctionHandler, JsNormalFunction, AsyncJsFunction, ProcessJsFunction, AsyncPromiseFunction, AsyncCallbackFunction} from "./types";
+import { v4 as uuid } from "uuid";
+import type { JsonValue, CallFunction, AsyncCallFunction, SyncCallFunction, RegisterFunction, RegisterAsyncFunction, RegisterProcessFunction, JsNormalFunctionHandler, AsyncJsFunctionHandler, ProcessJsFunctionHandler, JsNormalFunction, AsyncJsFunction, ProcessJsFunction, AsyncPromiseFunction, AsyncCallbackFunction } from "./types";
 
 export interface WebViewBridgeCall {
     call: CallFunction;
@@ -47,7 +47,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
     }
 
     call(nativeMethod: string, parameter?: JsonValue): void {
-        const arg = {data: parameter === undefined ? null : parameter};
+        const arg = { data: parameter === undefined ? null : parameter };
         if (window._dsbridge) {
             window._dsbridge.call(nativeMethod, JSON.stringify(arg));
         } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.asyncBridge) {
@@ -59,7 +59,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
     }
 
     asyncCall(nativeMethod: string, parameter?: JsonValue): Promise<JsonValue> {
-        const arg = {data: parameter === undefined ? null : parameter};
+        const arg = { data: parameter === undefined ? null : parameter };
         return new Promise<JsonValue>(resolve => {
             const callbackId = "asyncCall_" + uuid().replace(/-/g, "");
             (window as any)[callbackId] = (result: JsonValue) => {
@@ -79,7 +79,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
     }
 
     syncCall(nativeMethod: string, parameter?: JsonValue): JsonValue {
-        const arg = {data: parameter === undefined ? null : parameter};
+        const arg = { data: parameter === undefined ? null : parameter };
         let ret = "";
         if (window._dsbridge) {
             // android 只能传递 string 之类的原始类型
@@ -88,7 +88,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
             ret = prompt("_dsbridge=" + nativeMethod, JSON.stringify(arg)) || "";
         }
         try {
-            return JSON.parse(ret||'{}').data;
+            return JSON.parse(ret || '{}').data;
         } catch (e) {
             return undefined;
         }
@@ -109,7 +109,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
         this.registerMap.progress[handlerName] = handler;
     }
 
-    private postReady = () =>  {
+    private postReady = () => {
         if (!window._dsInit) {
             window._dsInit = true;
             //notify native that js apis register successfully on next event loop
@@ -126,44 +126,64 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
         return [namespace, func];
     }
 
-    private getFunction(handlerName: string): {type: string, function: JsNormalFunction | AsyncJsFunction | ProcessJsFunction, obj: any} | undefined {
+    private getFunction(handlerName: string): { type: string, function: JsNormalFunction | AsyncJsFunction | ProcessJsFunction, obj: any } | undefined {
 
         for (const key in this.registerMap) {
             if (Object.prototype.hasOwnProperty.call(this.registerMap, key)) {
                 const element = this.registerMap[key];
                 const funOrObj = element[handlerName];
                 if (funOrObj && typeof funOrObj === "function") {
-                    return {type: key, function: funOrObj, obj: undefined};
+                    return { type: key, function: funOrObj, obj: undefined };
                 }
                 const [namespace, func] = this.splitNativeMethod(handlerName);
                 const obj = (element[namespace] || {});
                 if (typeof obj === "object" && typeof obj[func] === "function") {
-                    return {type: key, function: obj[func], obj};
+                    return { type: key, function: obj[func], obj };
                 }
             }
         }
         return undefined;
     }
 
+    private structuredError(error: unknown): JsonValue {
+        if (error instanceof Error) {
+            return {
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+            };
+        }
+        return {
+            name: "UnknownError",
+            message: String(error),
+            stack: "",
+        };
+    }
+
     handleMessageFromNative = (info: JsonValue) => {
-        const {method, data, callbackId} = info as {method: string, data: string, callbackId: string};
+        const { method, data, callbackId } = info as { method: string, data: string, callbackId: string };
         // dsBridge native 端将传入的参数（数组）转换成了 string，所以需要转换回来
         const args = JSON.parse(data) as [...JsonValue[]];
         const ret: ReturnType = {
             id: callbackId,
             complete: true,
             data: undefined,
+            error: undefined,
         }
 
         const result = this.getFunction(method);
         if (!result) {
             return;
         }
-        const {type, function: func, obj} = result;
+        const { type, function: func, obj } = result;
         switch (type) {
-            case "normal":{
+            case "normal": {
                 const normalFunc = func as JsNormalFunction;
-                ret.data = normalFunc.apply(obj, args);
+                try {
+                    ret.data = normalFunc.apply(obj, args);
+                } catch (error) {
+                    ret.error = this.structuredError(error);
+                }
                 this.call(returnFunction, ret);
                 break;
             }
@@ -172,19 +192,27 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
                 // check function is promise or not
                 if ((asyncF as unknown as Promise<JsonValue>).then) {
                     const async1 = asyncF as AsyncPromiseFunction;
-                    async1.apply(obj, args).then(r => {
-                        ret.data = r;
-                        this.call(returnFunction, ret);
-                    }).catch(e => {
-                        // TODO:
-                    });
+                    async1.apply(obj, args)
+                        .then(r => {
+                            ret.data = r;
+                            this.call(returnFunction, ret);
+                        })
+                        .catch(e => {
+                            ret.error = this.structuredError(e);
+                            this.call(returnFunction, ret);
+                        });
                 } else {
                     const async1 = func as AsyncCallbackFunction;
                     const argsWithCallback = [...args, (r: JsonValue) => {
                         ret.data = r;
                         this.call(returnFunction, ret);
                     }] as [...JsonValue[], (r: JsonValue) => void];
-                    async1.apply(obj, argsWithCallback);
+                    try {
+                        async1.apply(obj, argsWithCallback);
+                    } catch (error) {
+                        ret.error = this.structuredError(error);
+                        this.call(returnFunction, ret);
+                    }
                 }
                 break;
             }
@@ -195,7 +223,12 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
                     ret.complete = complete;
                     this.call(returnFunction, ret);
                 }] as [...JsonValue[], (t: JsonValue, complete: boolean) => void];
-                processF.apply(obj, argsWithProgress);
+                try {
+                    processF.apply(obj, argsWithProgress);
+                } catch (error) {
+                    ret.error = this.structuredError(error);
+                    this.call(returnFunction, ret);
+                }
                 break;
             }
         }
@@ -209,6 +242,7 @@ type ReturnType = {
     id: string;
     complete: boolean;
     data: JsonValue | undefined;
+    error: JsonValue | undefined;
 }
 
 export const bridge = new WebViewBridge();

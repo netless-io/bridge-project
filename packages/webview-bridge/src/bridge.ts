@@ -80,14 +80,18 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
 
     syncCall(nativeMethod: string, parameter?: JsonValue): JsonValue {
         const arg = {data: parameter === undefined ? null : parameter};
-        const ret = "";
+        let ret = "";
         if (window._dsbridge) {
             // android 只能传递 string 之类的原始类型
             window._dsbridge.call(nativeMethod, JSON.stringify(parameter));
         } else {
-            prompt("_dsbridge=" + nativeMethod, JSON.stringify(arg));
+            ret = prompt("_dsbridge=" + nativeMethod, JSON.stringify(arg)) || "";
         }
-        return JSON.parse(ret||'{}').data;
+        try {
+            return JSON.parse(ret||'{}').data;
+        } catch (e) {
+            return undefined;
+        }
     }
 
     register(handlerName: string, handler: JsNormalFunctionHandler): void {

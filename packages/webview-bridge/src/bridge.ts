@@ -145,6 +145,10 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
         return undefined;
     }
 
+    private isAsyncFunction(func: any): func is AsyncJsFunction {
+        return func && func.constructor && func.constructor.name === 'AsyncFunction';
+    }
+
     private structuredError(error: unknown): JsonValue {
         if (error instanceof Error) {
             return {
@@ -189,8 +193,7 @@ class WebViewBridge implements WebViewRegister, WebViewBridgeCall {
             }
             case "async": {
                 const asyncF = func as AsyncJsFunction;
-                // check function is promise or not
-                if ((asyncF as unknown as Promise<JsonValue>).then) {
+                if (this.isAsyncFunction(asyncF)) {
                     const async1 = asyncF as AsyncPromiseFunction;
                     async1.apply(obj, args)
                         .then(r => {

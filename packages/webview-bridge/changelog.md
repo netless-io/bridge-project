@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.1.12
+
+### Patch Changes
+
+- b639216: Return syncCall ret for iOS prompt
+
 ## 0.1.11
 
 ### Patch Changes

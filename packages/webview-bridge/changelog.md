@@ -1,5 +1,11 @@
 # webview-bridge
 
+## 0.2.1
+
+### Patch Changes
+
+- 13e741b: Fix async call with async syntax
+
 ## 0.2.0
 
 ### Minor Changes
